@@ -9,10 +9,41 @@
     </head>
     <body>
         <header>
-            <h1>test</h1>
+            <h1>雲林科技大學</h1>
         </header>
         <main>
-            <p>����</p>
+            <table border="1">
+                <caption>功能表</caption>
+                <thead>
+                    <th>項目</th>
+                    <th colspan="2">功能</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>請輸入想要傳到firebase的資料</td>
+                        <td><input type="text" id="InputData"></td>
+                        <td><button id="InputButton">送出</button></td>
+                    </tr>
+                    <tr>
+                        <td>顯示firebase得到的資料</td>
+                        <td><label id="PrintInputData">尚未有輸入</label></td>
+                        <td>
+                            <button id="PrintButton">顯示</button>
+                            <button id="ClearButton">清除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>顯示圖片</td>
+                        <td><img id="ImageDisplay" src="" width="250" height="250"></td>
+                        <td>
+                            <select id="ImageSelect">
+                                <option value="">請選擇圖片</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </main>
+        <script type="module" src="script.js"></script>
     </body>
 </html>
