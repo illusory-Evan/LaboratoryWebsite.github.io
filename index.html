@@ -18,31 +18,43 @@
                 font-weight: bold;
             }
 
+            .tableHeight {
+                height: 100px;
+            }
+
+            .tableWidthImg {
+                width: 300px;
+            }
+
             .tableWidth1 {
-                width: 60px;
+                width: 80px;
             }
 
             .tableWidth2 {
-                width: 140px;
+                width: 170px;
+            }
+
+            .tableWidth3 {
+                width: 100px;
             }
 
             .scrollable-list {
-            width: 300px;
-            max-height: 200px; /* 设置列表的最大高度 */
-            overflow-y: auto; /* 超出部分垂直方向滚动 */
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 10px;
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                width: 250px;
+                max-height: 200px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 10px;
+                background-color: #fff;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
 
             .scrollable-list li {
-            margin: 5px 0;
-            padding: 8px;
-            background-color: #e9ecef;
-            border-radius: 4px;
-            list-style: none;
+                height: 20px;
+                margin: 5px 0;
+                padding: 8px;
+                background-color: #e9ecef;
+                border-radius: 4px;
+                list-style: none;
             }
 
             #TestData {
@@ -58,10 +70,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="2" rowspan="3">汽車圖片</br><img id="CarImg" src="" width="200" height="150"></td>
-                        <td colspan="2" rowspan="3">駕駛人圖片</br><img id="DriverImg" src="" width="200" height="150"></td>
-                        <td class="tableWidth1">總評分</td>
-                        <td class="tableWidth2"><label id="Point">分數</label></td>
+                        <td colspan="2" rowspan="3" class="tableWidthImg">汽車圖片</br><img id="CarImg" src="" width="300" height="250"></td>
+                        <td colspan="2" rowspan="3" class="tableWidthImg">駕駛人圖片</br><img id="DriverImg" src="" width="300" height="250"></td>
+                        <td class="tableWidth1 tableHeight">總評分</td>
+                        <td class="tableWidth2 tableHeight"><label id="Point">分數</label></td>
                     </tr>
                     <tr>
                         <td colspan="2" class="tableHeight1">記錄日誌</td>
@@ -69,41 +81,50 @@
                     <tr>
                         <td colspan="2" rowspan="3">
                             <ul class="scrollable-list">
-                                <li>日誌</li>
-                                <li>日誌</li>
-                                <li>日誌</li>
-                                <li>日誌</li>
-                                <li>日誌</li>
-                                <li>日誌</li>
-                                <li>日誌</li>
-                                <li>日誌</li>
-                                <li>日誌</li>
-                                <li>日誌</li>
-                                <li>日誌</li>
-                                <li>日誌</li>
-                                <li>日誌</li>
-                                <li>日誌</li>
-                                <li>日誌</li>
-                                <li>日誌</li>
-                                <li>日誌</li>
+                                <li id="log1"></li>
+                                <li id="log2"></li>
+                                <li id="log3"></li>
+                                <li id="log4"></li>
+                                <li id="log5"></li>
                             </ul>
                         </td>
                     </tr>
                     <tr>
-                        <td>汽車款式型號</td>
+                        <td class="tableWidth3">汽車款式型號</td>
                         <td><label id="CarBrand">汽車款式</label></td>
-                        <td>駕駛人身分證</td>
+                        <td class="tableWidth3">駕駛人身分證</td>
                         <td><label id="DriverID">身分證</label></td>
                     </tr>
                     <tr>
-                        <td>汽車車牌號</td>
+                        <td class="tableWidth3">汽車車牌號</td>
                         <td><label id="LicensePlate">車牌</label></td>
-                        <td>駕駛人生日</td>
+                        <td class="tableWidth3">駕駛人生日</td>
                         <td><label id="DriverBirthday">生日</label></td>
                     </tr>
                 </tbody>
                 <tfoot>
-                    <td colspan="6" rowspan="2"><label id="ViolationRecord">違規紀錄</label></td>
+                    <td colspan="6">
+                        <table>
+                            <tr>
+                                <th rowspan="2">違規次數</th>
+                                <td>車距過近</td>
+                                <td><label id="TooClose"></label>次</td>
+                                <th rowspan="2">駕駛狀態檢測</th>
+                                <td>分心</td>
+                                <td><label id="Distractions"></label>次</td>
+                                <td>使用手機</td>
+                                <td><label id="UsingMobilePhone"></label>次</td>
+                            </tr>
+                            <tr>
+                                <td>壓車道線</td>
+                                <td><label id="LanePressingLine"></label>次</td>
+                                <td>打瞌睡</td>
+                                <td><label id="Nod"></label>次</td>
+                                <td>抽菸</td>
+                                <td><label id="Smoke"></label>次</td>
+                            </tr>
+                        </table>
+                    </td>
                 </tfoot>
             </table>
         </main>
@@ -133,8 +154,9 @@
                     </tr>
                     <tr>
                         <td>違規項目</td>
-                        <td><input type="text" id="ViolationRecordInput"></td>
-                        <td><input type="number" id="ViolationRecordTime">次</td>
+                        <td><input type="text" id="ViolationTime" placeholder="2024-04-11 23:03:35"></td>
+                        <td><input type="text" id="ViolationRecordInput" placeholder="車距過近"></td>
+                        <!-- <td><input type="number" id="ViolationRecordTime">次</td> -->
                     </tr>
                 </tbody>
             </table>
@@ -152,6 +174,15 @@
             // https://firebase.google.com/docs/web/setup#available-libraries
 
             // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyCK4juwHIRyHmWx5wrZXb2uxLKJoeZ0cdw",
+                authDomain: "drivingcreditscoringsystem.firebaseapp.com",
+                databaseURL: "https://drivingcreditscoringsystem-default-rtdb.firebaseio.com",
+                projectId: "drivingcreditscoringsystem",
+                storageBucket: "drivingcreditscoringsystem.firebasestorage.app",
+                messagingSenderId: "705137872436",
+                appId: "1:705137872436:web:97058309dc0076f7e2c461"
+            };
 
             // Initialize Firebase
             const app = initializeApp(firebaseConfig);
@@ -166,94 +197,150 @@
             const DriverID = document.getElementById("DriverID");
             const DriverBirthday = document.getElementById("DriverBirthday");
             const ViolationRecord = document.getElementById("ViolationRecord");
-            const ViolationRecordTime = document.getElementById("ViolationRecordTime");
+            const TooClose = document.getElementById("TooClose");
+            const LanePressingLine = document.getElementById("LanePressingLine");
+            const Distractions = document.getElementById("Distractions");
+            const Nod = document.getElementById("Nod");
+            const UsingMobilePhone = document.getElementById("UsingMobilePhone");
+            const Smoke = document.getElementById("Smoke");
 
+            const CarBrandInput = document.getElementById("CarBrandInput");
+            const LicensePlateInput = document.getElementById("LicensePlateInput");
+            const DriverIDInput = document.getElementById("DriverIDInput");
+            const DriverBirthdayInput = document.getElementById("DriverBirthdayInput");
+            const ViolationRecordInput = document.getElementById("ViolationRecordInput");
+            const ViolationTime = document.getElementById("ViolationTime");
+            // const ViolationRecordTime = document.getElementById("ViolationRecordTime");
+
+            var Violation = {"車距過近" : 0,
+                            "壓車道線" : 0,
+                            "分心" : 0,
+                            "打瞌睡" : 0,
+                            "使用手機" : 0,
+                            "抽菸" : 0}
+
+            const maxLog = 5;
+            var ViolationLog = [];
+
+            submitButton.addEventListener("click", submitData);
             function submitData(){
+                console.log("submit");
                 var data;
-                data = {"CarBrand" : CarBrand.value};
-                const path = "/ID/" + DriverID;
-                const dbref = dbRef(db, `/{path}`);
+                var violationlog;
+                const violationType = ViolationRecordInput.value;
+                if (Violation.hasOwnProperty(violationType)) {
+                    // Violation[violationType] = parseInt(ViolationRecordTime.value);
+                    Violation[violationType]++;
+                    violationlog = ViolationTime.value + " " + violationType;
+                    addViolationLog(violationlog);
+                } else {
+                    alert("輸入違規類型不存在");
+                    ViolationRecordInput.value = "";
+                    // ViolationRecordTime.value = 0;
+                    return;
+                }
+
+                data = {"CarBrand" : CarBrandInput.value,
+                        "LicensePlate" : LicensePlateInput.value,
+                        "DriverBirthday" : DriverBirthdayInput.value,
+                        "Violation": Violation,
+                        "Log" : ViolationLog
+                    };
+
+                const path = "/ID/" + DriverIDInput.value;
+                const dbref = dbRef(db, `/${path}`);
                 update(dbref, data).then(() => {
                     console.log("上傳成功");
                 }).catch((error) => {
                     console.log("上傳失敗")})
+
+                ViolationRecordInput.value = "";
+                ViolationTime.value = "";
+                // ViolationRecordTime.value = 0;
+                showTime();
+                showLog();
             }
-            // var InputText = document.getElementById("InputData");
-            // var submitButton = document.getElementById("InputButton")
 
-            // submitButton.addEventListener("click", inputdata);
-            // function inputdata(value){
-            //     var str = "";
-            //     str = InputText.value;
-            //     InputText.value = "";
-            //     console.log(str);
-            //     const newdata = {str};
-            //     const path = "/Inputdata";
-            //     const dbref = dbRef(db, `/${path}`);
-            //     update(dbref, newdata).then(() => {
-            //         console.log("上傳成功");
-            //     }).catch((error) => {
-            //         console.log("上傳失敗")})
-            // }
+            clearButton.addEventListener("click", clearInput);
+            function clearInput(){
+                console.log("clear");
+                CarBrandInput.value = "";
+                LicensePlateInput.value = "";
+                DriverIDInput.value = "";
+                DriverBirthdayInput.value = "";
+                ViolationRecordInput.value = "";
+                // ViolationRecordTime.value = 0;
+            }
 
-            // var PrintLabel = document.getElementById("PrintInputData");
-            // var printButton = document.getElementById("PrintButton");
+            function addViolationLog(entry){
+                ViolationLog.push(entry);
 
-            // printButton.addEventListener("click", printdata);
-            // function printdata(){
-            //     var str = "";
-            //     const path = "/Inputdata";
-            //     const dbref = dbRef(db, `/${path}`);
-            //     get(dbref).then((snapshot) => {
-            //         if(snapshot.exists()){
-            //             const data = snapshot.val();
-            //             str = data.str;
-            //             PrintLabel.innerText = str;
-            //             console.log("取得成功")
-            //         }
-            //     })
-            // }
+                ViolationLog.sort((a, b) => {
+                    const timeA = new Date(a.split(" ")[0] + " " + a.split(" ")[1]);
+                    const timeB = new Date(b.split(" ")[0] + " " + b.split(" ")[1]);
+                    return timeA - timeB;
+                });
 
-            // var clearButton = document.getElementById("ClearButton");
+                if(ViolationLog.length > maxLog){
+                    ViolationLog.shift();
+                }
 
-            // clearButton.addEventListener("click", clearlabel);
-            // function clearlabel(){
-            //     PrintLabel.innerHTML = "尚未有輸入";
-            // }
+                console.log(ViolationLog);
+            }
+            
+            function showLog(){
+                for(let i = 1; i <= maxLog; i++){
+                    const logElement = document.getElementById(`log${i}`);
+                    if(logElement){
+                        if(i-1 <ViolationLog.length){
+                            logElement.textContent = ViolationLog[i - 1];
+                        }
+                        else{
+                            logElement.textContent = "";
+                        }
+                    }
+                }
+            }
 
-            // var ImgSelector = document.getElementById("ImageSelect");
-            // var imgDisplay = document.getElementById("ImageDisplay");
+            function showTime(){
+                TooClose.innerHTML = Violation["車距過近"];
+                LanePressingLine.innerHTML = Violation["壓車道線"];
+                Distractions.innerHTML = Violation["分心"];
+                Nod.innerHTML = Violation["打瞌睡"];
+                UsingMobilePhone.innerHTML = Violation["使用手機"];
+                Smoke.innerHTML = Violation["抽菸"];
+            }
 
-            // function populateImageSelector() {
-            //     const storageFolderRef = storageRef(storage, "images/"); // 假設圖片存放在 "images/" 資料夾
-            //     listAll(storageFolderRef)
-            //         .then((res) => {
-            //             res.items.forEach((itemRef) => {
-            //                 getDownloadURL(itemRef).then((url) => {
-            //                     const option = document.createElement("option");
-            //                     option.value = url;
-            //                     option.textContent = itemRef.name; // 顯示檔案名稱
-            //                     ImgSelector.appendChild(option);
-            //                 });
-            //             });
-            //         })
-            //         .catch((error) => {
-            //             console.error("無法列出檔案: ", error);
-            //         });
-            // }
+            function setStartData(){
+                const setID = "A123456789";
+                DriverID.innerHTML = setID;
+                const path = "/ID/" + setID;
+                const dbref = dbRef(db, `/${path}`);
+                get(dbref).then((snapshot) => {
+                    if(snapshot.exists()){
+                        const data = snapshot.val();
+                        console.log(data);
+                        CarBrand.innerHTML = data.CarBrand;
+                        LicensePlate.innerHTML = data.LicensePlate;
+                        DriverBirthday.innerHTML = data.DriverBirthday;
+                        if(data.Violation){
+                            Violation = data.Violation;
+                        }
+                        if(data.Log){
+                            ViolationLog = data.Log;
+                        }
+                        showTime();
+                        showLog();
 
-            // // 當用戶選擇圖片時更新顯示
-            // ImgSelector.addEventListener("change", () => {
-            //     const selectedImageUrl = ImgSelector.value;
-            //     if (selectedImageUrl) {
-            //         imgDisplay.src = selectedImageUrl;
-            //     } else {
-            //         imgDisplay.src = "";
-            //     }
-            // });
+                        CarBrandInput.value = data.CarBrand;
+                        LicensePlateInput.value = data.LicensePlate;
+                        DriverIDInput.value = setID;
+                        DriverBirthdayInput.value = data.DriverBirthday;
+                    }
+                })
+            }
 
-            // // 呼叫函數初始化選擇器
-            // populateImageSelector();
+            setStartData();
         </script>
     </body>
 </html>
