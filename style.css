@@ -13,3 +13,34 @@ caption {
     font-size: 150%;
     font-weight: bold;
 }
+
+.tableWidth1 {
+    width: 60px;
+}
+
+.tableWidth2 {
+    width: 140px;
+}
+
+.scrollable-list {
+    width: 300px;
+    max-height: 200px; /* ?置列表的最大高度 */
+    overflow-y: auto; /* 超出部分垂直方向?? */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .scrollable-list li {
+    margin: 5px 0;
+    padding: 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    list-style: none;
+  }
+  
+#TestData {
+    margin-top: 50px;
+}

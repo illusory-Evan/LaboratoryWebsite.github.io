@@ -8,142 +8,210 @@
         </style>
     </head>
     <body>
-        <header>
-            <h1>雲林科技大學</h1>
-        </header>
         <main>
             <table border="1">
-                <caption>功能表</caption>
                 <thead>
-                    <th>項目</th>
-                    <th colspan="2">功能</th>
+                    <th colspan="6">駕駛信用評分系統</th>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>請輸入想要傳到firebase的資料</td>
-                        <td><input type="text" id="InputData"></td>
-                        <td><button id="InputButton">送出</button></td>
+                        <td colspan="2" rowspan="3">汽車圖片</br><img id="CarImg" src="" width="200" height="150"></td>
+                        <td colspan="2" rowspan="3">駕駛人圖片</br><img id="DriverImg" src="" width="200" height="150"></td>
+                        <td class="tableWidth1">總評分</td>
+                        <td class="tableWidth2"><label id="Point">分數</label></td>
                     </tr>
                     <tr>
-                        <td>顯示firebase得到的資料</td>
-                        <td><label id="PrintInputData">尚未有輸入</label></td>
-                        <td>
-                            <button id="PrintButton">顯示</button>
-                            <button id="ClearButton">清除</button>
+                        <td colspan="2" class="tableHeight1">記錄日誌</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" rowspan="3">
+                            <ul class="scrollable-list">
+                                <li>日誌</li>
+                                <li>日誌</li>
+                                <li>日誌</li>
+                                <li>日誌</li>
+                                <li>日誌</li>
+                                <li>日誌</li>
+                                <li>日誌</li>
+                                <li>日誌</li>
+                                <li>日誌</li>
+                                <li>日誌</li>
+                                <li>日誌</li>
+                                <li>日誌</li>
+                                <li>日誌</li>
+                                <li>日誌</li>
+                                <li>日誌</li>
+                                <li>日誌</li>
+                                <li>日誌</li>
+                            </ul>
                         </td>
                     </tr>
                     <tr>
-                        <td>顯示圖片</td>
-                        <td><img id="ImageDisplay" src="" width="250" height="250"></td>
-                        <td>
-                            <select id="ImageSelect">
-                                <option value="">請選擇圖片</option>
-                            </select>
-                        </td>
+                        <td>汽車款式型號</td>
+                        <td><label id="CarBrand">汽車款式</label></td>
+                        <td>駕駛人身分證</td>
+                        <td><label id="DriverID">身分證</label></td>
+                    </tr>
+                    <tr>
+                        <td>汽車車牌號</td>
+                        <td><label id="LicensePlate">車牌</label></td>
+                        <td>駕駛人生日</td>
+                        <td><label id="DriverBirthday">生日</label></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <td colspan="6" rowspan="2"><label id="ViolationRecord">違規紀錄</label></td>
+                </tfoot>
+            </table>
+        </main>
+        <div id="TestData">
+            <table border="1">
+                <caption>測試用資料輸入</caption>
+                <thead>
+                    <th>項目</th>
+                    <th colspan="2">輸入</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>汽車款式型號</td>
+                        <td colspan="2"><input type="text" id="CarBrandInput"></td>
+                    </tr>
+                    <tr>
+                        <td>汽車車牌</td>
+                        <td colspan="2"><input type="text" id="LicensePlateInput"></td>
+                    </tr>
+                    <tr>
+                        <td>駕駛人身分證</td>
+                        <td colspan="2"><input type="text" id="DriverIDInput"></td>
+                    </tr>
+                    <tr>
+                        <td>駕駛人生日</td>
+                        <td colspan="2"><input type="text" id="DriverBirthdayInput"></td>
+                    </tr>
+                    <tr>
+                        <td>違規項目</td>
+                        <td><input type="text" id="ViolationRecordInput"></td>
+                        <td><input type="number" id="ViolationRecordTime">次</td>
                     </tr>
                 </tbody>
             </table>
-        </main>
+            <div>
+                <button id="submitButton">送出</button>
+                <button id="clearButton">清除</button>
+            </div>
+        </div>
         <script type="module">
             // Import the functions you need from the SDKs you need
             import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
             import { getDatabase,ref as dbRef,update,get } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
-            import { getStorage, ref as storageRef, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-storage.js";
+            // import { getStorage, ref as storageRef, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-storage.js";
             // TODO: Add SDKs for Firebase products that you want to use
             // https://firebase.google.com/docs/web/setup#available-libraries
 
             // Your web app's Firebase configuration
-            const firebaseConfig = {
-                apiKey: "AIzaSyDt8m3HYqsdARjZxpc8j31Gjhk4n32KFiA",
-                authDomain: "database-internet-of-vehicles.firebaseapp.com",
-                databaseURL: "https://database-internet-of-vehicles-default-rtdb.firebaseio.com",
-                projectId: "database-internet-of-vehicles",
-                storageBucket: "database-internet-of-vehicles.appspot.com",
-                messagingSenderId: "821975788301",
-                appId: "1:821975788301:web:cb618dffdf320fea6a5e44"
-            };
+            
 
             // Initialize Firebase
             const app = initializeApp(firebaseConfig);
             const db = getDatabase(app);
-            const storage = getStorage(app);
+            // const storage = getStorage(app);
 
-            var InputText = document.getElementById("InputData");
-            var submitButton = document.getElementById("InputButton")
+            const submitButton = document.getElementById("submitButton");
+            const clearButton = document.getElementById("clearButton");
 
-            submitButton.addEventListener("click", inputdata);
-            function inputdata(value){
-                var str = "";
-                str = InputText.value;
-                InputText.value = "";
-                console.log(str);
-                const newdata = {str};
-                const path = "/Inputdata";
-                const dbref = dbRef(db, `/${path}`);
-                update(dbref, newdata).then(() => {
+            const CarBrand = document.getElementById("CarBrand");
+            const LicensePlate = document.getElementById("LicensePlate");
+            const DriverID = document.getElementById("DriverID");
+            const DriverBirthday = document.getElementById("DriverBirthday");
+            const ViolationRecord = document.getElementById("ViolationRecord");
+            const ViolationRecordTime = document.getElementById("ViolationRecordTime");
+
+            function submitData(){
+                var data;
+                data = {"CarBrand" : CarBrand.value};
+                const path = "/ID/" + DriverID;
+                const dbref = dbRef(db, `/{path}`);
+                update(dbref, data).then(() => {
                     console.log("上傳成功");
                 }).catch((error) => {
                     console.log("上傳失敗")})
             }
+            // var InputText = document.getElementById("InputData");
+            // var submitButton = document.getElementById("InputButton")
 
-            var PrintLabel = document.getElementById("PrintInputData");
-            var printButton = document.getElementById("PrintButton");
+            // submitButton.addEventListener("click", inputdata);
+            // function inputdata(value){
+            //     var str = "";
+            //     str = InputText.value;
+            //     InputText.value = "";
+            //     console.log(str);
+            //     const newdata = {str};
+            //     const path = "/Inputdata";
+            //     const dbref = dbRef(db, `/${path}`);
+            //     update(dbref, newdata).then(() => {
+            //         console.log("上傳成功");
+            //     }).catch((error) => {
+            //         console.log("上傳失敗")})
+            // }
 
-            printButton.addEventListener("click", printdata);
-            function printdata(){
-                var str = "";
-                const path = "/Inputdata";
-                const dbref = dbRef(db, `/${path}`);
-                get(dbref).then((snapshot) => {
-                    if(snapshot.exists()){
-                        const data = snapshot.val();
-                        str = data.str;
-                        PrintLabel.innerText = str;
-                        console.log("取得成功")
-                    }
-                })
-            }
+            // var PrintLabel = document.getElementById("PrintInputData");
+            // var printButton = document.getElementById("PrintButton");
 
-            var clearButton = document.getElementById("ClearButton");
+            // printButton.addEventListener("click", printdata);
+            // function printdata(){
+            //     var str = "";
+            //     const path = "/Inputdata";
+            //     const dbref = dbRef(db, `/${path}`);
+            //     get(dbref).then((snapshot) => {
+            //         if(snapshot.exists()){
+            //             const data = snapshot.val();
+            //             str = data.str;
+            //             PrintLabel.innerText = str;
+            //             console.log("取得成功")
+            //         }
+            //     })
+            // }
 
-            clearButton.addEventListener("click", clearlabel);
-            function clearlabel(){
-                PrintLabel.innerHTML = "尚未有輸入";
-            }
+            // var clearButton = document.getElementById("ClearButton");
 
-            var ImgSelector = document.getElementById("ImageSelect");
-            var imgDisplay = document.getElementById("ImageDisplay");
+            // clearButton.addEventListener("click", clearlabel);
+            // function clearlabel(){
+            //     PrintLabel.innerHTML = "尚未有輸入";
+            // }
 
-            function populateImageSelector() {
-                const storageFolderRef = storageRef(storage, "images/"); // 假設圖片存放在 "images/" 資料夾
-                listAll(storageFolderRef)
-                    .then((res) => {
-                        res.items.forEach((itemRef) => {
-                            getDownloadURL(itemRef).then((url) => {
-                                const option = document.createElement("option");
-                                option.value = url;
-                                option.textContent = itemRef.name; // 顯示檔案名稱
-                                ImgSelector.appendChild(option);
-                            });
-                        });
-                    })
-                    .catch((error) => {
-                        console.error("無法列出檔案: ", error);
-                    });
-            }
+            // var ImgSelector = document.getElementById("ImageSelect");
+            // var imgDisplay = document.getElementById("ImageDisplay");
 
-            // 當用戶選擇圖片時更新顯示
-            ImgSelector.addEventListener("change", () => {
-                const selectedImageUrl = ImgSelector.value;
-                if (selectedImageUrl) {
-                    imgDisplay.src = selectedImageUrl;
-                } else {
-                    imgDisplay.src = "";
-                }
-            });
+            // function populateImageSelector() {
+            //     const storageFolderRef = storageRef(storage, "images/"); // 假設圖片存放在 "images/" 資料夾
+            //     listAll(storageFolderRef)
+            //         .then((res) => {
+            //             res.items.forEach((itemRef) => {
+            //                 getDownloadURL(itemRef).then((url) => {
+            //                     const option = document.createElement("option");
+            //                     option.value = url;
+            //                     option.textContent = itemRef.name; // 顯示檔案名稱
+            //                     ImgSelector.appendChild(option);
+            //                 });
+            //             });
+            //         })
+            //         .catch((error) => {
+            //             console.error("無法列出檔案: ", error);
+            //         });
+            // }
 
-            // 呼叫函數初始化選擇器
-            populateImageSelector();
+            // // 當用戶選擇圖片時更新顯示
+            // ImgSelector.addEventListener("change", () => {
+            //     const selectedImageUrl = ImgSelector.value;
+            //     if (selectedImageUrl) {
+            //         imgDisplay.src = selectedImageUrl;
+            //     } else {
+            //         imgDisplay.src = "";
+            //     }
+            // });
+
+            // // 呼叫函數初始化選擇器
+            // populateImageSelector();
         </script>
     </body>
 </html>
