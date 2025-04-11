@@ -23,24 +23,24 @@ caption {
 }
 
 .scrollable-list {
-    width: 300px;
-    max-height: 200px; /* ?竚程蔼 */
-    overflow-y: auto; /* 禬场だよ?? */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+width: 300px;
+max-height: 200px; /* ?竚程蔼 */
+overflow-y: auto; /* 禬场だよ?? */
+border: 1px solid #ccc;
+border-radius: 8px;
+padding: 10px;
+background-color: #fff;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  .scrollable-list li {
-    margin: 5px 0;
-    padding: 8px;
-    background-color: #e9ecef;
-    border-radius: 4px;
-    list-style: none;
-  }
-  
+.scrollable-list li {
+margin: 5px 0;
+padding: 8px;
+background-color: #e9ecef;
+border-radius: 4px;
+list-style: none;
+}
+
 #TestData {
     margin-top: 50px;
 }
