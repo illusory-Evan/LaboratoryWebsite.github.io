@@ -22,6 +22,10 @@
                 height: 100px;
             }
 
+            .tableHeight1 {
+                height: 30px;
+            }
+
             .tableWidthImg {
                 width: 300px;
             }
@@ -38,7 +42,12 @@
                 width: 100px;
             }
 
+            #Point {
+                font-size: 300%;
+            }
+
             .scrollable-list {
+                margin: 0;
                 width: 250px;
                 max-height: 200px;
                 border: 1px solid #ccc;
@@ -55,6 +64,15 @@
                 background-color: #e9ecef;
                 border-radius: 4px;
                 list-style: none;
+            }
+
+            .timetable th {
+                width: 150px;
+                text-align: right;
+            }
+
+            .timeName {
+                width: 70px;
             }
 
             #TestData {
@@ -104,23 +122,23 @@
                 </tbody>
                 <tfoot>
                     <td colspan="6">
-                        <table>
+                        <table class="timetable">
                             <tr>
                                 <th rowspan="2">違規次數</th>
-                                <td>車距過近</td>
+                                <td class="timeName">車距過近</td>
                                 <td><label id="TooClose"></label>次</td>
                                 <th rowspan="2">駕駛狀態檢測</th>
-                                <td>分心</td>
+                                <td class="timeName">分心</td>
                                 <td><label id="Distractions"></label>次</td>
-                                <td>使用手機</td>
+                                <td class="timeName">使用手機</td>
                                 <td><label id="UsingMobilePhone"></label>次</td>
                             </tr>
                             <tr>
-                                <td>壓車道線</td>
+                                <td class="timeName">壓車道線</td>
                                 <td><label id="LanePressingLine"></label>次</td>
-                                <td>打瞌睡</td>
+                                <td class="timeName">打瞌睡</td>
                                 <td><label id="Nod"></label>次</td>
-                                <td>抽菸</td>
+                                <td class="timeName">抽菸</td>
                                 <td><label id="Smoke"></label>次</td>
                             </tr>
                         </table>
@@ -196,6 +214,7 @@
             const LicensePlate = document.getElementById("LicensePlate");
             const DriverID = document.getElementById("DriverID");
             const DriverBirthday = document.getElementById("DriverBirthday");
+            const Point = document.getElementById("Point");
             const ViolationRecord = document.getElementById("ViolationRecord");
             const TooClose = document.getElementById("TooClose");
             const LanePressingLine = document.getElementById("LanePressingLine");
@@ -323,6 +342,7 @@
                         CarBrand.innerHTML = data.CarBrand;
                         LicensePlate.innerHTML = data.LicensePlate;
                         DriverBirthday.innerHTML = data.DriverBirthday;
+                        Point.innerHTML = data.Point;
                         if(data.Violation){
                             Violation = data.Violation;
                         }
