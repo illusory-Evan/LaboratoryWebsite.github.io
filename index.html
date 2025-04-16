@@ -231,12 +231,12 @@
             const ViolationTime = document.getElementById("ViolationTime");
             // const ViolationRecordTime = document.getElementById("ViolationRecordTime");
 
-            var Violation = {"車距過近" : 0,
-                            "壓車道線" : 0,
-                            "分心" : 0,
-                            "打瞌睡" : 0,
-                            "使用手機" : 0,
-                            "抽菸" : 0}
+            var Violation = {"TooClose" : 0,            //車距過近
+                            "LanePressingLine" : 0,     //壓車道線
+                            "Distractions" : 0,         //分心
+                            "Nod" : 0,                  //打瞌睡
+                            "UsingMobilePhone" : 0,     //使用手機
+                            "Smoke" : 0}                //抽菸
 
             const maxLog = 5;
             var ViolationLog = [];
@@ -357,12 +357,12 @@
             }
 
             function showTime(){
-                TooClose.innerHTML = Violation["車距過近"];
-                LanePressingLine.innerHTML = Violation["壓車道線"];
-                Distractions.innerHTML = Violation["分心"];
-                Nod.innerHTML = Violation["打瞌睡"];
-                UsingMobilePhone.innerHTML = Violation["使用手機"];
-                Smoke.innerHTML = Violation["抽菸"];
+                TooClose.innerHTML = Violation["TooClose"];
+                LanePressingLine.innerHTML = Violation["LanePressingLine"];
+                Distractions.innerHTML = Violation["Distractions"];
+                Nod.innerHTML = Violation["Nod"];
+                UsingMobilePhone.innerHTML = Violation["UsingMobilePhone"];
+                Smoke.innerHTML = Violation["Smoke"];
             }
 
             function setStartData(){
