@@ -186,7 +186,7 @@
         <script type="module">
             // Import the functions you need from the SDKs you need
             import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-            import { getDatabase,ref as dbRef,update,get } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+            import { getDatabase,ref as dbRef,update,get,onValue } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
             // import { getStorage, ref as storageRef, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-storage.js";
             // TODO: Add SDKs for Firebase products that you want to use
             // https://firebase.google.com/docs/web/setup#available-libraries
@@ -240,6 +240,7 @@
 
             const maxLog = 5;
             var ViolationLog = [];
+            const setID = "A123456789";
 
             submitButton.addEventListener("click", submitData);
             function submitData(){
@@ -291,6 +292,24 @@
                 // ViolationRecordTime.value = 0;
             }
 
+            const userRef = dbRef(db, "/ID/" + `${setID}`);
+            onValue(userRef, (snapshot) => {
+                const data = snapshot.val();
+                console.log(data);
+                CarBrand.innerHTML = data.CarBrand;
+                LicensePlate.innerHTML = data.LicensePlate;
+                DriverBirthday.innerHTML = data.DriverBirthday;
+                Point.innerHTML = data.Point;
+                if(data.Violation){
+                    Violation = data.Violation;
+                }
+                if(data.Log){
+                    ViolationLog = data.Log;
+                }
+                showTime();
+                showLog();
+            })
+
             function addViolationLog(entry){
                 ViolationLog.push(entry);
 
@@ -308,6 +327,22 @@
             }
             
             function showLog(){
+                ViolationLog.sort((a, b) => {
+                    const timeA = new Date(a.split(" ")[0] + " " + a.split(" ")[1]);
+                    const timeB = new Date(b.split(" ")[0] + " " + b.split(" ")[1]);
+                    return timeA - timeB;
+                });
+                if(ViolationLog.length > maxLog){
+                    ViolationLog.shift();
+                    const data = {"Log" : ViolationLog};
+                    const path = "/ID/" + setID;
+                    const dbref = dbRef(db, `/${path}`);
+                    update(dbref,data).then(() => {
+                        console.log("上傳成功");
+                    }).catch((error) => {
+                        console.log("上傳失敗")})
+                }
+
                 for(let i = 1; i <= maxLog; i++){
                     const logElement = document.getElementById(`log${i}`);
                     if(logElement){
@@ -331,7 +366,6 @@
             }
 
             function setStartData(){
-                const setID = "A123456789";
                 DriverID.innerHTML = setID;
                 const path = "/ID/" + setID;
                 const dbref = dbRef(db, `/${path}`);
